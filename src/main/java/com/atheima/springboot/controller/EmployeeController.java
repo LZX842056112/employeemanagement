@@ -44,7 +44,6 @@ public class EmployeeController {
     @PostMapping("/emp")
     public String addEmp(Employee employee){
         //来到员工列表页面
-
         System.out.println("保存的员工信息："+employee);
         //保存员工
         employeeDao.save(employee);
@@ -53,12 +52,11 @@ public class EmployeeController {
         return "redirect:/emps";
     }
 
-    //来到修改页面，查出当前员工，在页面回显
+    //来到修改页面，查出当前员工，在页面回显，PathVariable路径变量
     @GetMapping("/emp/{id}")
     public String toEditPage(@PathVariable("id") Integer id, Model model){
         Employee employee = employeeDao.get(id);
         model.addAttribute("emp",employee);
-
         //页面要显示所有的部门列表
         Collection<Department> departments = departmentDao.getDepartments();
         model.addAttribute("depts",departments);
